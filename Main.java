@@ -11,9 +11,9 @@ class Main{
             String ruta = "numero.txt";
             String contenido;
             StringBuilder builder = new StringBuilder();
-            boolean ciclo = true;
             //generar 3000 datos aleatorios
             for(int i=0;i<3000;i++){
+                boolean ciclo = true;
                 int aleatorio = rand.nextInt(6000);
                 do{
                     if(numeros.contains(aleatorio)){
@@ -24,7 +24,7 @@ class Main{
                     }
                 }while(ciclo);               
             }
-
+            
             //guardar los numeros en string
             for(Integer item : numeros){
                 builder.append(item + " ");
