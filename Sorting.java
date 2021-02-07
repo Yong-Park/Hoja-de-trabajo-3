@@ -2,39 +2,61 @@ public class Sorting {
 
     //sort para tipo Gnome
     public static void gnomeSort(Comparable[] list){
-        for (int index = 1; index < list.length; index++)
-      {
-         Comparable key = list[index];
-         int position = index;
-
-         //  Shift larger values to the right
-         while (position > 0 && key.compareTo(list[position-1]) < 0)
-         {
-            list[position] = list[position-1];
-            position--;
-         }
-            
-         list[position] = key;
-      }
+        int i=1;
+        int j=2;
+        Comparable tmp;
+        
+        while(i<list.length){
+            if(list[i-1].compareTo(list[i])<0){
+                tmp = list[i-1];
+                list[i-1] =list[i];
+                list[i--] = tmp;
+                i = (i==0) ? j++:i;
+            }else{
+                 i = j; j++;
+            }
+        }
     }
 
     //sort para tipo Merge
-    public static void mergeSort(Comparable[] list){
-        int min;
-        Comparable temp;
-
-        for (int index = 0; index < list.length-1; index++)
-        {
-            min = index;
-            for (int scan = index+1; scan < list.length; scan++)
-                if (list[scan].compareTo(list[min]) < 0)
-                min = scan;
-
-            // Swap the values
-            temp = list[min];
-            list[min] = list[index];
-            list[index] = temp;
+    public static  Comparable[] mergeSort(Comparable[] list) {
+        if(list.length<=1){
+            return list;
         }
+        Comparable[] first = new Comparable[list.length / 2];
+        Comparable[] second = new Comparable[list.length - first.length];
+        System.arraycopy(list, 0, first, 0, first.length);
+        System.arraycopy(list, first.length, second, 0, second.length);
+
+        mergeSort(first);
+        mergeSort(second); 
+        merge(first, second, list);
+
+        return list;
+        
+    }
+
+    private static void merge(Comparable[] first, Comparable[] second, Comparable[] result) {
+        int iFirst = 0;
+        int iSecond = 0;
+        int iMerged = 0;
+
+        while (iFirst < first.length && iSecond < second.length) 
+        {
+            if (first[iFirst].compareTo(second[iSecond]) > 0) 
+            {
+                result[iMerged] = first[iFirst];
+                iFirst++;
+            } 
+            else
+            {
+                result[iMerged] = second[iSecond];
+                iSecond++;
+            }
+            iMerged++;
+        }
+        System.arraycopy(first, iFirst, result, iMerged, first.length - iFirst);
+        System.arraycopy(second, iSecond, result, iMerged, second.length - iSecond);
     }
 
 }

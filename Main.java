@@ -92,9 +92,17 @@ class Main{
                     contador++;
                 }
                 System.out.println("Cantidad de datos: " + contador);
+                contador=0;
                 
             }else if(opcion_numero==2){
-
+                Comparable[] ordenado = Sorting.mergeSort(data);
+                for(Comparable orden : ordenado){
+                    System.out.println(orden);
+                    contador++;
+                }
+                System.out.println("Cantidad de datos: " + contador);
+                contador=0;
+                
             }else if(opcion_numero==3){
                 
             }else if(opcion_numero==4){
